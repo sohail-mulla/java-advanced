@@ -1,0 +1,178 @@
+=======================================================================
+                   JSP: JAVA SERVER PAGES
+=======================================================================
+
+1. INTRODUCTION TO JSP
+-----------------------------------------------------------------------
+* Definition: JSP stands for Java Server Pages. It is a server-side 
+  technology used to create dynamic, platform-independent web pages.
+* Concept: JSP = HTML + Java (Servlets). It is an advanced version of 
+  Servlet technology.
+* Performance: JSP is internally converted into a Servlet. While it is 
+  easier to write (HTML-like), it runs slightly slower than a direct 
+  Servlet due to the initial translation/compilation phase.
+* Recommendation: While JSP allows embedding Java code (Scriptlets), 
+  it is considered "worst practice." Best practice is to use JSTL 
+  tags and Java Beans for business logic.
+
+
+2. HOW JSP WORKS (THE ARCHITECTURE)
+-----------------------------------------------------------------------
+
+1. Request: Client requests a .jsp page.
+2. Translation: The JSP Container translates the .jsp file into a 
+   Java Servlet (.java).
+3. Compilation: The generated Servlet is compiled into bytecode (.class).
+4. Execution: The Servlet is loaded, initialized, and services the request.
+
+
+3. JSP LIFECYCLE & METHODS
+-----------------------------------------------------------------------
+1. Translation: jsp file ---> .java servlet.
+2. Compilation: servlet ---> .class bytecode.
+3. Loading & Instantiation: Object creation by the container.
+4. Initialization: jspInit() is called (once).
+5. Request Handling: jspService() is called (for every request).
+6. Destruction: jspDestroy() is called (server shutdown).
+
+
+4. JSP TAGS (SCRIPTING ELEMENTS)
+-----------------------------------------------------------------------
+1. Directive Tag (<%@ ... %>): Global info (e.g., <%@ page import="..." %>).
+2. Declarative Tag (<%! ... %>): Declare variables/methods.
+3. Scriplet Tag (<% ... %>): Write raw Java code (Not recommended).
+4. Expression Tag (<%= ... %>): Direct output (No semicolon needed).
+5. Action Tags (<jsp:action ... />): Flow control (include, forward).
+6. Custom Tags (<%@ taglib ... %>): Use custom functionality libraries.
+
+
+5. IMPLICIT OBJECTS (PREDEFINED VARIABLES)
+-----------------------------------------------------------------------
+Implicit objects are automatically created by the container.
+
+- out (PrintWriter): For writing data to the response.
+- request (HttpServletRequest): Access client data/parameters.
+- response (HttpServletResponse): Send data back to the client.
+- session (HttpSession): Track user data across multiple pages.
+- application (ServletContext): Shared data across the whole app.
+- exception (Throwable): Only available on "Error Pages."
+- config, pageContext, page.
+
+
+6. COMPARISON: JSP VS. SERVLET VS. HTML
+-----------------------------------------------------------------------
+
+| Feature       | HTML                   | JSP                      | Servlet                  |
+|---------------|------------------------|--------------------------|--------------------------|
+| Content       | Static only            | Dynamic Content          | Dynamic Content          |
+| Logic         | None                   | Easy (HTML based)        | Hard (Java based)        |
+| Speed         | Fastest (Browser)      | Medium (Server)          | Fast (Server)            |
+| MVC Role      | Static View            | View (UI)                | Controller (Logic)       |
+| Protocols     | Any                    | HTTP Only                | All (GenericServlet)     |
+
+
+7. MVC ARCHITECTURE (THE INDUSTRY STANDARD)
+-----------------------------------------------------------------------
+
+* Model: Database code (JDBC / Hibernate).
+* View: Presentation layer (JSP / React / HTML).
+* Controller: Flow control (Servlet / Spring Boot).
+
+
+
+ MVC (MODEL-VIEW-CONTROLLER) ARCHITECTURE
+-----------------------------------------------------------------------
+The MVC pattern separates an application into three main components:
+
+| Component | Responsibility              | Technologies (Legacy) | Technologies (Modern) |
+|-----------|-----------------------------|-----------------------|-----------------------|
+| FRONTEND  | View: Displaying Output UI  | HTML / JSP            | React / Angular       |
+| BACKEND   | Controller: Calling Func.   | Servlet               | Spring / Spring Boot  |
+| DATABASE  | Model: DB Connection Code   | JDBC                  | ORM (Hibernate)       |
+
+ROLES DEFINED:
+* Model: Responsible for data and business logic (JDBC / ORM).
+* View: Responsible for the presentation layer (JSP / React).
+* Controller: Acts as an interface between View and Model (Servlet / Spring Boot).
+
+
+
+ JSP IMPLICIT OBJECTS
+-----------------------------------------------------------------------
+Definition:
+1) JSP implicit objects are predefined variables available for use without 
+   any explicit declaration or initialization.
+2) These objects are automatically created by the JSP container to provide 
+   access to core web functionalities.
+
+THE IMPLICIT OBJECT TABLE:
+
+| Object Name    | Internal Type / Class         |
+|----------------|-------------------------------|
+| out            | PrintWriter                   |
+| request        | HttpServletRequest            |
+| response       | HttpServletResponse           |
+| config         | ServletConfig                 |
+| session        | HttpSession                   |
+| application    | ServletContext                |
+| pagecontext    | PageContext                   |
+| page           | Object                        |
+| exception      | Throwable                     |
+| context        | Context                       |
+
+
+ MVC FLOW SUMMARY
+-----------------------------------------------------------------------
+1. User interacts with the VIEW (JSP/HTML).
+2. Request is sent to the CONTROLLER (Servlet).
+3. Controller interacts with the MODEL (JDBC/Hibernate) to get data.
+4. Controller sends data back to a VIEW to display to the user.
+
+
+
+=======================================================================
+               SUMMARY & INTERVIEW QUESTIONS (Q&A)
+=======================================================================
+
+Q1: Why are they called "Implicit" objects?
+A: Because you don't need to write 'HttpServletRequest request = ...'. 
+   The web container provides them automatically inside the 
+   _jspService() method during translation.
+
+Q2: Which implicit object is used to store data for a single user across 
+    multiple pages?
+A: The 'session' object (HttpSession).
+
+Q3: In MVC, why don't we put JDBC code directly in a JSP?
+A: Putting DB code in a JSP makes the "View" too heavy and violates 
+   the MVC pattern. It makes the code hard to reuse and very 
+   difficult to debug.
+
+Q4: What is the difference between 'application' and 'session' objects?
+A: 'session' is specific to one user. 'application' is shared by every 
+   user currently using the website.
+
+Q5: Why is JSP called an "extension" of Servlet?
+A: Because a JSP page is literally turned into a Servlet by the web 
+   container before it can be executed.
+
+Q6: What are Implicit Objects?
+A: These are objects that are automatically available in JSP without 
+   the developer having to instantiate them (e.g., request, session).
+
+Q7: Difference between Scriptlet and Expression tags?
+A: Scriptlets (<% %>) are used for logic; they don't print to the 
+   screen automatically. Expressions (<%= %>) are used to print data 
+   and do not require a semicolon.
+
+Q8: Why is it recommended to avoid Java code in JSP?
+A: It violates the MVC pattern. Mixing Java logic with HTML makes the 
+   page hard to debug, test, and maintain. Use Tag Libraries (JSTL) 
+   instead.
+
+Q9: When does JSP translation happen?
+A: Translation happens only once: on the very first request for the page, 
+   or if the .jsp file is modified. Subsequent requests use the 
+   already compiled .class file.
+
+=======================================================================
