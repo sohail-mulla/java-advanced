@@ -1,0 +1,73 @@
+
+=======================================================================
+            SERVLET CONFIGURATION & HTTP METHODS
+=======================================================================
+
+
+1. WEB.XML (DEPLOYMENT DESCRIPTOR)
+-----------------------------------------------------------------------
+* Definition: The web.xml file is also known as the Deployment 
+  Descriptor file.
+* Location: It is created inside the 'WEB-INF' folder of a web project.
+* Role: It tells the Servlet Container (like Tomcat) which URL should 
+  trigger which Servlet class.
+* Status: In modern Java (Servlet 3.0+), it is no longer compulsory to 
+  create this file, though it is still used in older legacy projects.
+
+2. @WEBSERVLET ANNOTATION
+-----------------------------------------------------------------------
+* Level: This annotation is used only at the Class Level.
+* Purpose: It is an exact replacement for the web.xml file.
+* Function: It allows you to declare a servlet and map it to a specific 
+  URL pattern directly within the Java class.
+* Benefit: Simplifies configuration and makes the code easier to 
+  maintain by removing the need for bulky XML files.
+* Example: @WebServlet("/login") 
+
+3. HTTP GET() VS POST()
+-----------------------------------------------------------------------
+A. HTTP GET():
+   - Data sent in Header (URL Query String).
+   - Capacity: Limited amount of data.
+   - Security: Not secure (exposed in URL bar).
+   - Features: Can be bookmarked; slightly faster and more efficient.
+   - Default: HTML forms call the GET method by default.
+
+B. HTTP POST():
+   - Data sent in the Request Body.
+   - Capacity: Large amount of data can be sent.
+   - Security: Secured (not exposed in URL).
+   - Features: Cannot be bookmarked; slightly slower/less efficient.
+
+4. HANDLER METHODS: doGet() vs doPost()
+-----------------------------------------------------------------------
+* doGet(): Used to handle HTTP GET requests. Primarily used for 
+  retrieving or fetching data from the server.
+* doPost(): Used to handle HTTP POST requests. Typically used for 
+  submitting, saving, or processing data on the server.
+
+-----------------------------------------------------------------------
+5. INTERVIEW REINFORCEMENT (Q&A)
+-----------------------------------------------------------------------
+
+Q1: What is the @WebServlet annotation?
+A1: It is a metadata tag used in Java Servlets (3.0+) to declare a 
+    servlet and its URL mapping. It replaces the need for configuration 
+    in the web.xml file, making the project cleaner.
+
+Q2: What is the web.xml file / Deployment Descriptor?
+A2: It is an XML file that contains the configuration for a web 
+    application, such as servlet mappings, welcome file lists, and 
+    security constraints. It tells the server how to run the application.
+
+Q3: What is the difference between GET and POST?
+A3: GET is for fetching data (visible in URL, limited size, cacheable). 
+    POST is for submitting data (hidden in body, unlimited size, 
+    not cacheable).
+
+Q4: Can a single Servlet handle both GET and POST?
+A4: Yes. You can override both doGet() and doPost() methods in the 
+    same Servlet class to handle different types of requests coming 
+    to the same URL.
+
+=======================================================================
