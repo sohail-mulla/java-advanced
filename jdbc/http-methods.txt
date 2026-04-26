@@ -1,0 +1,72 @@
+
+=======================================================================
+                HTTP METHODS: GET VS POST
+=======================================================================
+
+
+1. HTTP GET()
+-----------------------------------------------------------------------
+* Data Placement: Sent in the URL (Query String).
+* Data Limit: Limited amount of data (usually 2048 characters max).
+* Security: Not secure. Sensitive data (passwords) is exposed in the 
+  address bar and browser history.
+* Bookmarking: Can be bookmarked and cached.
+* Performance: Slightly faster and more efficient because it involves 
+  a single round-trip to the server.
+* Idempotency: GET is "Idempotent"—requesting the same URL 100 times 
+  will result in the same outcome without changing server state.
+
+
+2. HTTP POST()
+-----------------------------------------------------------------------
+* Data Placement: Sent in the HTTP Message Body.
+* Data Limit: No specific limit; can send large amounts of data (files, 
+  images, large forms).
+* Security: More secure than GET because data is not visible in the URL. 
+  (Note: Always use HTTPS to fully secure POST data).
+* Bookmarking: Cannot be bookmarked or cached.
+* Performance: Slightly slower because it often involves a two-step 
+  process (sending headers first, then the body).
+* Usage: Used for creating or updating resources (e.g., submitting 
+  a registration form).
+
+
+3. SERVLET METHODS: doGet() vs doPost()
+-----------------------------------------------------------------------
+
+A. doGet():
+   - Called by the Servlet Container (Tomcat) to handle a GET request.
+   - Purpose: Retrieving or fetching data from the server.
+   - Example: Searching for a product, viewing a profile.
+
+B. doPost():
+   - Called by the Servlet Container to handle a POST request.
+   - Purpose: Submitting, saving, or updating data on the server.
+   - Example: Login forms, file uploads, payment processing.
+
+-----------------------------------------------------------------------
+4. INTERVIEW REINFORCEMENT (Q&A)
+-----------------------------------------------------------------------
+
+Q1: What is the main difference between GET and POST?
+A1: The main difference is visibility and intent. GET appends data to 
+    the URL (visible/limited) and is meant for fetching data. POST 
+    hides data in the request body (invisible/unlimited) and is meant 
+    for sending data to be processed.
+
+Q2: When should we use doGet() vs doPost()?
+A2: Use doGet() for "Safe" operations where you are just reading data. 
+    Use doPost() for "Unsafe" operations where you are changing data 
+    (Inserting into a database) or sending sensitive information.
+
+Q3: Is POST 100% secure?
+A3: No. While data isn't in the URL, it can still be intercepted by 
+    hackers using tools. You must use SSL/TLS (HTTPS) to encrypt the 
+    POST body for true security.
+
+Q4: Why is GET faster?
+A4: Most browsers send a GET request in a single TCP packet. POST 
+    requests sometimes send the headers first and wait for a "100 
+    Continue" response from the server before sending the data body.
+
+=======================================================================
