@@ -1,0 +1,86 @@
+
+=======================================================================
+            SERVLET COLLABORATION & REDIRECTION
+=======================================================================
+
+
+1. SERVLET COLLABORATION
+-----------------------------------------------------------------------
+* Definition: The process of communicating or calling from one servlet 
+  to another resource (Servlet, HTML, or JSP) is called Servlet 
+  Collaboration.
+* Purpose: To share the work between different components. For example, 
+  one Servlet handles Login validation, while another handles the 
+  Dashboard display.
+* Mechanism: Usually achieved using the 'RequestDispatcher' interface.
+
+
+2. REQUESTDISPATCHER (INTERFACE)
+-----------------------------------------------------------------------
+* Package: Part of the Jakarta/Java Servlet API.
+* Role: It acts as an internal routing mechanism to forward or include 
+  resources within the same server/application.
+* Key Feature: The URL in the browser address bar DOES NOT change.
+
+METHODS:
+A. forward(request, response):
+   - Passes the entire request from Servlet A to Servlet B.
+   - Servlet A stops processing; Servlet B generates the final response.
+   - The user never knows they were moved to a different servlet.
+
+B. include(request, response):
+   - Merges the response of another resource into the current response.
+   - Example: Including a common 'Header.html' or 'Footer.html' into 
+     multiple servlet responses.
+
+
+3. SENDREDIRECT (METHOD)
+-----------------------------------------------------------------------
+* Source: A method of the 'HttpServletResponse' interface.
+* Syntax: response.sendRedirect("url");
+* Role: It tells the browser to make a completely NEW request to a 
+  different URL.
+* Key Feature: The URL in the browser address bar CHANGES.
+
+
+4. COMPARISON: REQUESTDISPATCHER VS. SENDREDIRECT
+-----------------------------------------------------------------------
+
+| Feature              | RequestDispatcher (forward/include) | SendRedirect                     |
+|----------------------|-------------------------------------|----------------------------------|
+| Redirection Type     | Internal (Server-side)              | External (Client-side)           |
+| URL Bar              | Does NOT change                     | Changes to the new URL           |
+| Performance          | Faster (Internal to server)         | Slower (Requires a new request)  |
+| Request Objects      | Original Request is shared          | New Request is created           |
+| Reach                | Within the SAME application only    | Anywhere (Internal or External)  |
+| Interface used       | HttpServletRequest                  | HttpServletResponse              |
+
+
+=======================================================================
+               SUMMARY & INTERVIEW QUESTIONS (Q&A)
+=======================================================================
+
+Q1: What is Servlet Collaboration?
+A: It is the interaction between multiple servlets where they share 
+   information or pass control to one another to complete a client 
+   request.
+
+Q2: What is RequestDispatcher?
+A: It is an interface used to dispatch requests to another resource 
+   (Servlet, HTML, or JSP) on the same server. It provides the 
+   forward() and include() methods.
+
+Q3: Why use sendRedirect() if we already have RequestDispatcher?
+A: SendRedirect is necessary when:
+   1. You need to redirect to a resource outside your web application 
+      (e.g., redirecting to www.google.com).
+   2. You want the URL to change so the user can bookmark the new page.
+   3. You want to implement the "Post-Redirect-Get" pattern to prevent 
+      duplicate form submissions.
+
+Q4: What happens to the data in the 'request' object during sendRedirect?
+A: The data is LOST because sendRedirect forces the browser to create 
+   a brand-new request. If you need to keep data, you must use 
+   HttpSession or URL Rewriting.
+
+=======================================================================
