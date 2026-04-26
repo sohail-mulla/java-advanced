@@ -1,0 +1,99 @@
+
+=======================================================================
+                JAVA SERVLETS: CORE ARCHITECTURE
+=======================================================================
+
+
+
+1. INTRODUCTION TO SERVLET
+-----------------------------------------------------------------------
+* Definition: Servlet is an API (Application Programming Interface) 
+  and a server-side technology used to create dynamic web applications.
+* Role: Servlets are Java classes that run on a web server (like Tomcat), 
+  handle client requests, process them, and generate dynamic responses 
+  (HTML, XML, or JSON).
+* Platform Independent: Since they are written in Java, they follow 
+  Java EE specifications and are robust and scalable.
+* Model: They follow the Request-Response model using two key objects:
+  1. HttpServletRequest: Encapsulates all client request information.
+  2. HttpServletResponse: Allows the servlet to generate/send the response.
+
+
+2. SERVLET LIFECYCLE (THE 5 STAGES)
+-----------------------------------------------------------------------
+The Servlet container (e.g., Tomcat) manages the lifecycle of a servlet.
+
+1. Servlet Class is Loaded: The compiled .class file is loaded into memory.
+2. Servlet is Instantiated: The container creates an instance (object) 
+   of the servlet using the default constructor.
+3. Servlet is Initialized (init): The init() method is called once.
+4. Service the Request (service): The service() method handles each 
+   incoming request.
+5. Servlet is Destroyed (destroy): The destroy() method is called before 
+   the servlet is removed from memory.
+
+
+3. LIFECYCLE METHODS
+-----------------------------------------------------------------------
+A. init()
+   - Called only ONCE during the lifetime of the servlet.
+   - Used for initialization tasks like opening a database connection.
+   - Return Type: void.
+
+B. service()
+   - Called for EVERY client request.
+   - It determines the HTTP method (GET, POST, etc.) and dispatches 
+     the request to doGet(), doPost(), etc.
+   - Return Type: void.
+
+C. destroy()
+   - Called only ONCE, typically when the server is shutting down.
+   - Used for cleanup tasks like closing database connections.
+   - Return Type: void.
+
+
+4. GENERICSERVLET VS HTTPSERVLET
+-----------------------------------------------------------------------
+| Feature             | GenericServlet            | HttpServlet            |
+|---------------------|---------------------------|------------------------|
+| Protocol            | Protocol Independent      | Protocol Dependent     |
+| Support             | Supports HTTP, FTP, SMTP  | Supports HTTP Only     |
+| service() method    | It is Abstract            | It is Non-Abstract     |
+| Req/Resp Objects    | Not protocol-specific     | Uses Http-specific     |
+|                     |                           | (HttpServletRequest)   |
+
+
+=======================================================================
+               SUMMARY & INTERVIEW QUESTIONS (Q&A)
+=======================================================================
+
+Q1: What is a Servlet?
+A: A Servlet is a Java technology used to extend the capabilities of a 
+   server. It acts as a middle layer between the client (browser) and the 
+   database to generate dynamic content.
+
+Q2: Explain the lifecycle of a servlet.
+A: The container loads the class, creates an instance, calls init(), 
+   then calls service() for every request. Finally, it calls destroy() 
+   during shutdown.
+
+Q3: How many objects of a Servlet are created?
+A: Only ONE object is created (Singleton-like behavior). This object 
+   is usually created when the first request for that servlet arrives.
+
+Q4: When exactly is the Servlet object created?
+A: By default, it is created during the first request. However, you 
+   can use the <load-on-startup> tag in web.xml (or the attribute in 
+   @WebServlet) to force it to be created when the server starts.
+
+Q5: Difference between GenericServlet and HttpServlet?
+A: GenericServlet is a base class that is protocol-neutral. 
+   HttpServlet is specialized for the HTTP protocol and provides 
+   methods like doGet() and doPost().
+
+Q6: Where do we create HTML files in a Java Web Project?
+A: HTML files should be placed in the 'webapp' (or 'WebContent') 
+   folder. Files inside 'WEB-INF' are protected and cannot be 
+   accessed directly by a browser via URL.
+
+=======================================================================
