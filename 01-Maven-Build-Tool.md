@@ -1,0 +1,71 @@
+
+=======================================================================
+                MAVEN: PROJECT MANAGEMENT & BUILD TOOL
+=======================================================================
+
+
+1. CORE CONCEPT
+
+-----------------------------------------------------------------------
+* Definition: An open-source build automation and project management tool 
+  developed by the Apache Software Foundation.
+
+* Meaning: 'Maven' is a Yiddish word meaning "Accumulator of Knowledge."
+
+* Philosophy: It uses "Convention over Configuration," meaning it has a 
+  standard project structure so developers don't have to waste time 
+  defining where files go.
+
+2. THE POM.XML (Project Object Model)
+-----------------------------------------------------------------------
+The pom.xml is the "Heart" of a Maven project. It contains:
+
+* Metadata: GroupId (organization), ArtifactId (project name), Version.
+* Dependencies: List of third-party libraries (Spring, MySQL Driver, etc.).
+* Packaging: Output format (.jar for apps, .war for web apps).
+* Repositories: Where Maven looks for jars (Local vs. Central).
+
+
+3. MAVEN BUILD LIFECYCLES
+-----------------------------------------------------------------------
+Maven follows a strict sequence. Running a later phase triggers all 
+previous phases automatically.
+
+A. CLEAN Lifecycle:
+   - clean: Deletes the 'target' folder (removes old compiled .class files).
+
+B. DEFAULT (Build) Lifecycle:
+   - validate: Checks if the project is correct and all info is available.
+   - compile: Converts source code (.java) to bytecode (.class).
+   - test: Executes Unit Tests (like JUnit) - Build fails if tests fail!
+   - package: Bundles the code into a JAR/WAR file.
+   - install: Puts the JAR into your Local Repository (~/.m2).
+   - deploy: Copies the JAR to a Remote Repository (for others to use).
+
+-----------------------------------------------------------------------
+4. INTERVIEW (Q&A)
+-----------------------------------------------------------------------
+
+Q1: How does Maven manage dependencies?
+A1: It uses Transitive Dependency Management. If your project needs 
+    Library A, and Library A needs Library B, Maven automatically 
+    downloads BOTH. You only have to list Library A in the pom.xml.
+
+Q2: Local vs. Central vs. Remote Repository?
+A2: 
+   - Local: A folder on your machine (~/.m2/repository).
+   - Central: Provided by the Maven community (internet).
+   - Remote: A private server used by companies (like Amazon's internal repo).
+   - Logic: Maven checks Local -> then Remote -> then Central.
+
+Q3: Maven vs. Gradle?
+A3: Maven uses XML (pom.xml) and is very structured/standard. Gradle 
+    uses Groovy/Kotlin DSL and is more flexible and faster (using 
+    incremental builds), but Maven is still the most common in industry.
+
+Q4: What is a Maven Plugin?
+A4: Maven is just a core engine; all the actual work (compiling, 
+    packaging) is done by Plugins. 
+    Ex: 'maven-compiler-plugin' handles the compilation step.
+
+=======================================================================
