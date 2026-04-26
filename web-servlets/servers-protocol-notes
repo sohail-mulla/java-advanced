@@ -1,0 +1,118 @@
+=======================================================================
+                WEB FUNDAMENTALS: SERVERS & PROTOCOLS
+=======================================================================
+
+1. TYPES OF APPLICATIONS
+-----------------------------------------------------------------------
+A. Stand-alone Application (Runs without Internet):
+   1. GUI Based (Graphical User Interface): Desktop apps with windows, 
+      buttons, and menus. E.g., Calculator, VLC Player.
+   2. CUI Based (Character User Interface): Also called "Console 
+      Applications." Programs that run via Command Prompt. E.g., All 
+      Core Java programs using Scanner/System.out.
+
+B. Web Application (Runs via Web Browser & Servers):
+   - Software accessed over a network connection (World Wide Web).
+   - E.g., www.google.com, Social Media sites.
+   - Enterprise Applications: High-scale apps like Banking or Telecom 
+     systems that support multiple services (ATMs, Smart Devices).
+
+
+2. SERVER CONCEPTS
+-----------------------------------------------------------------------
+A Server is a combination of Hardware and Software that accepts and 
+responds to requests made over a network by a Client.
+
+* Hardware Server: The physical machine. One physical machine can run 
+  multiple software servers, differentiated by "Ports."
+* Software Server:
+  - Web Servers: Deliver web content (HTML/CSS). E.g., Apache Tomcat 
+    (v10.1), IIS (Microsoft), Jetty, Glassfish.
+  - Application Servers: Handle complex business logic and multiple 
+    protocols. E.g., WebLogic (Oracle), JBoss/WildFly (Red Hat), 
+    WebSphere (IBM).
+  - Note: One Port can host only one application at a time.
+
+
+3. HTTP PROTOCOL (HYPERTEXT TRANSFER PROTOCOL)
+-----------------------------------------------------------------------
+* Definition: A "Protocol" is a set of rules for communication.
+* Stateless Nature: HTTP is a "Stateless" protocol. The connection 
+  between the browser and server is lost once the transaction ends. 
+  The server does not "remember" the client in the next request 
+  without help (like Cookies/Sessions).
+
+
+4. HTTP REQUEST & RESPONSE MODEL
+-----------------------------------------------------------------------
+HTTP follows a strict Request-Response communication model.
+
+A. HTTP REQUEST = Request Headers + Request Body
+   - Headers:
+     * Method: GET, POST, PUT, DELETE, HEAD, TRACE, OPTIONS.
+     * URL: Uniform Resource Locator (Identifier).
+     * Version: HTTP 1.1 or 2.0.
+     * Content-Type: text/html, application/json, image/jpeg, etc.
+     * User-Agent: Details about the client's browser and OS.
+   - Body:
+     * Contains the actual data (Form data in key=value pairs or JSON).
+
+B. HTTP RESPONSE = Response Headers + Response Body
+   - Headers:
+     * Status Code & Message (e.g., 200 OK).
+     * Content-Type: The type of data being sent back.
+     * Server Info: IP and software details.
+   - Body:
+     * The data displayed to the user (HTML tags, JSON data, etc.).
+
+
+5. HTTP STATUS CODES
+-----------------------------------------------------------------------
+* 2xx (Success): 200 - OK (Request succeeded).
+* 3xx (Redirection): 302 - Found (Resource moved temporarily).
+* 4xx (Client Error): 400 - Bad Request; 403 - Forbidden; 404 - Not Found.
+* 5xx (Server Error): 500 - Internal Server Error (Problem on server side).
+
+
+6. HTTP METHODS (CRUD OPERATIONS)
+-----------------------------------------------------------------------
+1. GET: Fetch/Retrieve data from the backend.
+2. POST: Send/Create new data from frontend to backend.
+3. PUT: Update an existing record.
+4. DELETE: Remove a particular record.
+
+
+7. CLIENT-SERVER COMMUNICATION FLOW
+-----------------------------------------------------------------------
+1. Client (Browser) sends an HTTP Request to the Web Server.
+2. Web Server passes the request to the corresponding Servlet.
+3. Servlet processes the logic (often interacting with a Database).
+4. Servlet generates an HTTP Response.
+5. Client Browser renders the response as output on the screen.
+
+=======================================================================
+               SUMMARY & INTERVIEW QUESTIONS (Q&A)
+=======================================================================
+
+Q1: What is the difference between a Web Server and an Application Server?
+A: A Web Server (like Tomcat) primarily handles HTTP and serves static 
+   content. An Application Server (like WebLogic) supports more 
+   protocols and provides enterprise services like EJB and distributed 
+   transactions.
+
+Q2: Why is HTTP called a "Stateless" protocol?
+A: Because each request is treated as a new, independent transaction. 
+   The server doesn't retain any data about the user from the previous 
+   request automatically.
+
+Q3: Explain the 4xx vs 5xx status codes.
+A: 4xx codes mean the client made a mistake (e.g., typing a wrong URL 
+   for 404). 5xx codes mean the client did everything right, but the 
+   server crashed or had a code error.
+
+Q4: What is a "Port" in the context of a server?
+A: A port is a logical endpoint for communication. It allows a single 
+   physical machine to run multiple services (e.g., MySQL on 3306 and 
+   Tomcat on 8080) without interference.
+
+=======================================================================
