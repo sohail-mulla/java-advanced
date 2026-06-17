@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration Form</title>
+    <style>
+        /* Modern Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            /* Vibrant, modern gradient background */
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 20px;
+        }
+
+        /* Form Container with distinct borders */
+        .form-container {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 650px;
+            padding: 40px;
+            border-radius: 16px;
+            /* Strong, colored top accent bar */
+            border-top: 8px solid #2563eb; 
+            /* Double layered shadow for depth */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Header Styles */
+        .form-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .form-header h2 {
+            color: #1e3a8a; /* Deep Royal Blue */
+            font-size: 30px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .form-header p {
+            color: #64748b;
+            font-size: 15px;
+        }
+
+        /* Explicit Separation Lines */
+        .divider {
+            border: 0;
+            height: 1px;
+            background: #e2e8f0;
+            margin: 25px 0;
+        }
+
+        .section-title {
+            color: #0d9488; /* Fresh Teal for sections */
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            grid-column: span 2;
+        }
+
+        /* Form Grid Layout */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .full-width {
+            grid-column: span 2;
+        }
+
+        /* Sharp, Defined Form Groups */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            color: #1e293b;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        /* Clear, colorful borders for inputs */
+        .form-group input,
+        .form-group select {
+            padding: 12px 16px;
+            border: 2px solid #cbd5e1; /* Clear default border */
+            border-radius: 8px;
+            font-size: 15px;
+            color: #0f172a;
+            background-color: #f8fafc; /* Subtle tint */
+            transition: all 0.25s ease;
+            outline: none;
+        }
+
+        /* Interactive Border & Background Shifts */
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #2563eb; /* Changes to Royal Blue */
+            background-color: #ffffff;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+        }
+
+        /* Enhanced Radio Options */
+        .gender-group {
+            display: flex;
+            gap: 20px;
+            background: #f1f5f9;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px dashed #cbd5e1;
+        }
+
+        .gender-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .gender-option input[type="radio"] {
+            accent-color: #0d9488; /* Teal accent for radios */
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .gender-option label {
+            margin-bottom: 0;
+            color: #334155;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        /* High-Contrast Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            transition: all 0.2s ease;
+            margin-top: 15px;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .submit-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Mobile Optimization */
+        @media (max-width: 600px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .full-width, .section-title {
+                grid-column: span 1;
+            }
+            .form-container {
+                padding: 25px 20px;
+            }
+            .gender-group {
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <div class="form-header">
+            <h2>Student Registration</h2>
+            <p>Complete the fields below to enroll in the academic portal.</p>
+        </div>
+
+        <form action="submit" method="POST">
+            <div class="form-grid">
+                
+                <h3 class="section-title">Personal Details</h3>
+
+                <div class="form-group">
+                    <label for="first-name">First Name</label>
+                    <input type="text" id="first-name" name="first_name" placeholder="Alex" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="last-name">Last Name</label>
+                    <input type="text" id="last-name" name="last_name" placeholder="Morgan" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" id="dob" name="dob" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Gender</label>
+                    <div class="gender-group">
+                        <div class="gender-option">
+                            <input type="radio" id="male" name="gender" value="male" required>
+                            <label for="male">Male</label>
+                        </div>
+                        <div class="gender-option">
+                            <input type="radio" id="female" name="gender" value="female">
+                            <label for="female">Female</label>
+                        </div>
+                        <div class="gender-option">
+                            <input type="radio" id="other" name="gender" value="other">
+                            <label for="other">Other</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="full-width"><hr class="divider"></div>
+
+                <h3 class="section-title">Academic & Contact Info</h3>
+
+                <div class="form-group full-width">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="alex.morgan@university.edu" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="(555) 019-2834" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="course">Course / Major</label>
+                    <select id="course" name="course" required>
+                        <option value="" disabled selected>Select your course</option>
+                        <option value="Computer Science & AI">Computer Science & AI</option>
+                        <option value="Data Analytics">Data Analytics</option>
+                        <option value="Business Administration">Business Administration</option>
+                        <option value="Mechanical Engineering">Mechanical Engineering</option>
+                    </select>
+                </div>
+
+                <div class="full-width"><hr class="divider"></div>
+
+                <h3 class="section-title">Account Security</h3>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="••••••••" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirm_password" placeholder="••••••••" required>
+                </div>
+
+                <div class="form-group full-width">
+                    <button type="submit" class="submit-btn">Complete Registration</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
