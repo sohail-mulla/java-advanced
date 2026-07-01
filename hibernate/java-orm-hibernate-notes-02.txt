@@ -1,0 +1,90 @@
+=======================================================================
+                   HIBERNATE MAPPING, LOADING & CACHING
+=======================================================================
+
+1. ASSOCIATION MAPPING IN HIBERNATE
+-----------------------------------------------------------------------
+
+*) ONE-TO-ONE (@OneToOne)
+- In Hibernate, One-to-One mapping is used to establish a relationship 
+  between two entities where one instance of an entity is associated with 
+  exactly one instance of another entity.
+- Example: 
+  One = Student
+  One = Laptop
+
+*) ONE-TO-MANY (@OneToMany)
+- In Hibernate, a One-to-Many relationship is established when one instance 
+  of an entity is associated with multiple instances of another entity.
+- Example: 
+  One  = Department
+  Many = Employees
+
+*) MANY-TO-ONE (@ManyToOne)
+- Opposite of One-To-Many.
+- With same example: 
+  Many = Employees
+  One  = Department
+
+*) MANY-TO-MANY (@ManyToMany)
+- In Hibernate, a Many-to-Many relationship represents a situation where 
+  multiple instances of one entity are associated with multiple instances 
+  of another entity.
+- Example: 
+  Many = Students
+  Many = Courses
+
+
+2. EAGER LOADING VS. LAZY LOADING
+-----------------------------------------------------------------------
+
+
+
+| Feature              | Lazy Loading (Default)               | Eager Loading                         |
+|----------------------|--------------------------------------|---------------------------------------|
+| Fetch Type           | FetchType.LAZY                       | FetchType.EAGER                       |
+| When Data is Loaded? | When accessed                        | Immediately                           |
+| Performance          | Better for large data                | Slower (loads everything)             |
+| Proxy Object?        | Yes                                  | No                                    |
+| Session Issue        | Throws LazyInitializationException   | No exception                          |
+|                      | if accessed after session closes     |                                       |
+
+
+3. HIBERNATE CACHING MECHANISMS
+-----------------------------------------------------------------------
+
+
+
+- First-Level Cache (Session Cache)
+* Scope: A Hibernate session (transaction scope).
+* By default: Hibernate uses a first-level cache which is associated with the 
+  Hibernate session object. This is a mandatory cache provided by Hibernate.
+* Purpose: To reduce the number of database queries by caching entities within 
+  the current session.
+
+- Second-Level Cache (SessionFactory Cache)
+* Scope: Across multiple sessions and transactions (session factory scope).
+* Configuration: Second-level caching is optional and needs to be explicitly 
+  configured using a third-party cache provider like EHCache, Infinispan, 
+  OSCache, or Redis.
+* Purpose: To store entities across sessions and minimize database access even 
+  further by caching objects beyond the lifespan of a single session.
+* Note: To enable the second-level cache, you need to configure it in the 
+  hibernate.cfg.xml and specify the cache provider.
+
+
+4. PROXY OBJECTS
+-----------------------------------------------------------------------
+* Definition: A proxy object is a placeholder for an entity that Hibernate 
+  uses to implement lazy loading. 
+* Behavior: When Hibernate retrieves an entity lazily, it doesn't fetch the 
+  actual data from the database immediately. Instead, it creates a proxy 
+  that contains only the identifier (primary key) of the entity.
+
+* Example:
+  Employee employee = session.load(Employee.class, employeeId);
+  // Database is not hit yet; employee is just a proxy object holding the ID
+  
+  System.out.println("Employee Name: " + employee.getName());
+  // Database query is triggered here only when actual data (Name) is accessed
+=======================================================================
