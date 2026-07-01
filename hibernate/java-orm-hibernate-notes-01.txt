@@ -1,0 +1,135 @@
+=======================================================================
+                   JAVA ORM, HIBERNATE, AND JPA CORE NOTES
+=======================================================================
+
+1. WHAT IS ORM (OBJECT RELATIONAL MAPPING)?
+-----------------------------------------------------------------------
+* ORM stands for object relational mapping.
+* It is a programming strategy to map objects with the data store in the 
+  database.
+* It simplifies table creation, data manipulation, and data access.
+
+
+2. WHAT IS HIBERNATE?
+-----------------------------------------------------------------------
+* Hibernate is a framework.
+* It is a Java ORM Framework.
+* Breaking down ORM in Hibernate:
+  - O => Object: It is your POJO class Object or Entity class Object.
+  - R => Relational: The word relational refers to the database, so in your 
+         application, the database may be H2, Oracle, MySQL, or PostgreSQL.
+  - Mapping => Map your Object to DB directly.
+
+
+
+
+3. DIFFERENCE BETWEEN HIBERNATE & JDBC : 
+-----------------------------------------------------------------------
+
+Hibernate:
+
+1. It is a Java-based ORM framework.
+2. Hibernate can map your entity class object data directly to the database 
+   with the help of predefined Annotations.
+3. Hibernate manages all exceptions itself.
+4. Hibernate uses HQL (Hibernate Query Language) similar to SQL to provide 
+   additional features of OOPS concepts like inheritance, association, and 
+   many more.
+5. In Hibernate, you can manage all types of association like one-to-one mapping, 
+   one-to-many, many-to-one, and many-to-many in an easy way with the help of 
+   annotations.
+6. Hibernate provides good support for lazy loading.
+7. All transaction management is handled by Hibernate automatically using the 
+   Transaction(I) interface.
+8. It has to wait for more time to get solutions for any issue i.e., good 
+   support service is not available.
+9. Hibernate provides a two-level caching mechanism like L1 cache & L2 cache.
+
+JDBC:
+
+1. It is a database connectivity tool (API).
+2. In JDBC, you cannot map entity class object data directly to the database; 
+   for that, we have to write some pieces of code.
+3. JDBC needs to write try-catch blocks to manage all exceptions.
+4. JDBC can create queries & update data in a relational database using the 
+   Structured Query Language (SQL).
+5. JDBC is difficult to manage association mapping like one-to-one, many-to-one, 
+   and so on.
+6. JDBC does not support lazy loading.
+7. In JDBC, all transaction management is managed by itself when working with 
+   JDBC code.
+8. JDBC has a strong community to get solutions for any issue i.e., good 
+   support service is available.
+9. JDBC needs to write code for implementing caching.
+
+
+4. KEY COMPONENTS COMPARED
+-----------------------------------------------------------------------
+
+Key Components of JDBC:
+* DriverManager
+* Connection
+* Statement
+* PreparedStatement
+* ResultSet
+
+Key Components of Hibernate:
+* Configuration
+* Session
+* SessionFactory
+* Transaction
+
+
+5. POJO CLASS & PERSISTENT CLASSES
+-----------------------------------------------------------------------
+* POJO Class (Plain Old Java Objects): 
+  Contains Fields, Constructor with No arguments / with arguments, getters & 
+  setters, and a toString method.
+
+* Persistent Classes:
+  Any classes whose objects are stored in database tables are called persistent 
+  classes. For example: Entity, ID, Table, Column...
+
+
+6. ANNOTATIONS IN HIBERNATE
+-----------------------------------------------------------------------
+> Note: All entity class annotations are present in the 'jakarta.persistence' 
+  package.
+
+* @Entity : It is a class-level annotation. The entity annotation in Hibernate 
+  is used to mark a class as an entity, and it marks the class name as a 
+  database table name.
+* @Id : This annotation indicates the primary key for the table.
+* @GeneratedValue(strategy = GenerationType.IDENTITY) : This annotation is used 
+  for AUTO_INCREMENT features.
+* @Table : By using this annotation, we set the database table name.
+* @Column : By using this annotation, we set the column name of the database table.
+
+
+7. WHAT IS JPA (JAVA PERSISTENCE API)?
+-----------------------------------------------------------------------
+* ORM creates a bridge for communication for your application (Java / Python / 
+  .NET) with a relational database, so it is called ORM.
+* In the market, there are many more ORMs for Java Applications like Hibernate, 
+  TopLink, iBatis, and EclipseLink. These are the top ORM providers.
+* Each ORM has its own API methods to interact with the database to store or 
+  get the data from the database.
+* To access any ORM in your application, we are required to add its individual 
+  JAR file into our project, then we can use its own methods to interact with 
+  the DB.
+* If after some time I want to use any other ORM in my application, then for 
+  that I have to remove the Hibernate ORM and add a different ORM to access 
+  data from the DB. In that case, we have to use that particular ORM's JAR files 
+  in our project and use its own different methods. So in that case, again we 
+  have to do extra effort to write down the code for this particular ORM.
+* Having to rewrite code for other ORM frameworks makes it very difficult for 
+  the developer as well as other teams to manage the JAR files.
+* To avoid all these things, JPA comes into the picture, which is called the 
+  Java Persistence API.
+* JPA defines a set of rules or specifications for ORM frameworks in Java.
+* JPA is an Interface that has some methods that we can use with the help of 
+  any ORM implementation, like the persist() and merge() methods.
+* JPA is a Standard to maintain for all ORMs, so it is called a specification.
+
+
+=======================================================================
