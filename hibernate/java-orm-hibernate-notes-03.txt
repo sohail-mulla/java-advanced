@@ -1,0 +1,102 @@
+=======================================================================
+                   HIBERNATE ARCHITECTURE & OBJECT LIFE CYCLE
+=======================================================================
+
+1. STAGES OF OBJECTS IN HIBERNATE (OBJECT LIFE CYCLE)
+-----------------------------------------------------------------------
+
+
+
+* Transient: The object is created but is not yet associated with any Hibernate 
+  session or database table.
+* Persistent: The object is actively associated with a Hibernate session and 
+  is tied to a row in the database.
+* Detached: The object was previously persistent but has been detached from 
+  the session (the session is closed or cleared).
+* Removed: The object is scheduled to be deleted from the database table.
+
+
+2. HIBERNATE CONFIGURATION FILE (hibernate.cfg.xml) & DIALECT
+-----------------------------------------------------------------------
+* hibernate.cfg.xml: This configuration file contains database connection 
+  details, mapping resources, and other required settings used by Hibernate. 
+  It also contains Dialect information.
+* Hibernate Mapping Files: These are XML files that define the mapping between 
+  Java classes and database tables. They specify how each property of a Java 
+  class maps to a column in a database table.
+* Dialect: A dialect in Hibernate is a class that acts as a bridge between 
+  Java JDBC types and database-specific SQL types.
+
+
+3. HIBERNATE CORE INTERFACES & CLASSES
+-----------------------------------------------------------------------
+
+Configuration (Class)
+* It is a class present in the 'org.hibernate' package.
+* The Configuration class represents the configuration settings for Hibernate, 
+  such as database connection properties, mapping files or annotations, and 
+  other environment-specific configurations.
+
+SessionFactory (Interface)
+* It is an interface present in the 'org.hibernate' package.
+* SessionFactory provides the instances (objects) of a Session.
+* It acts as a factory of sessions and functions as a client of the connection provider.
+* It holds the second-level cache of data.
+
+Session (Interface)
+* It is an interface present in the 'org.hibernate' package.
+* It maintains a live connection between the Hibernate application and the database.
+* It provides methods to store, update, delete, or fetch data from the database 
+  such as persist(), remove(), merge(), update(), save(), get(), and load().
+* It is a factory of Query and Criteria (it provides factory methods to return 
+  these instances).
+
+Transaction (Interface)
+* It is an interface present in the 'org.hibernate' package.
+* It represents a single database transaction in Hibernate.
+* It provides methods to begin, commit, and rollback transactions.
+
+
+=======================================================================
+                     SUMMARY & INTERVIEW QUESTIONS
+=======================================================================
+
+* Q1: What is ORM?
+  Ans: ORM stands for object relational mapping. It is a programming strategy 
+  to map objects with the data store in the database. It simplifies table 
+  creation, data manipulation, and data access.
+
+* Q2: What are the core interfaces of hibernate technology / key components?
+  Ans: Configuration (class), SessionFactory, Session, and Transaction.
+
+* Q3: What are the advantages of using ORM over JDBC?
+  Ans: Direct entity object mapping via annotations, automatic exception 
+  handling, HQL with OOP support, easy association management, lazy loading, 
+  automatic transaction handling, and built-in L1/L2 caching.
+
+* Q4: Explain hibernate architecture.
+  Ans: It uses a configuration file to build a SessionFactory. The SessionFactory 
+  opens individual Sessions to run database operations inside a Transaction.
+
+* Q5: What is the purpose of the hibernate configuration file (hibernate.cfg.xml)?
+  Ans: It stores database connection settings, mapping file locations, and the 
+  database dialect.
+
+* Q6: What is Configuration?
+  Ans: A class used to specify and load the configurations and properties needed 
+  to start up Hibernate.
+
+* Q7: What are the features of hibernate?
+  Ans: Automatic persistence, ORM, Transaction management, lazy loading, 
+  automatic schema generation, Criteria API, Hibernate Query Language (HQL), 
+  and mapping concepts.
+
+* Q8: How to Insert the data in hibernate?
+  Ans: save() / persist() -> Return type: void
+
+* Q9: How to Update the data in hibernate?
+  Ans: update() / merge() -> Return type: void 
+
+* Q10: How to delete the data in hibernate?
+  Ans: delete() / remove() -> Return type: void
+=======================================================================
