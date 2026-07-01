@@ -67,13 +67,18 @@ JDBC:
 -----------------------------------------------------------------------
 
 Key Components of JDBC:
+
 * DriverManager
 * Connection
 * Statement
 * PreparedStatement
 * ResultSet
 
+
+
+
 Key Components of Hibernate:
+
 * Configuration
 * Session
 * SessionFactory
@@ -82,6 +87,7 @@ Key Components of Hibernate:
 
 5. POJO CLASS & PERSISTENT CLASSES
 -----------------------------------------------------------------------
+
 * POJO Class (Plain Old Java Objects): 
   Contains Fields, Constructor with No arguments / with arguments, getters & 
   setters, and a toString method.
@@ -93,7 +99,7 @@ Key Components of Hibernate:
 
 6. ANNOTATIONS IN HIBERNATE
 -----------------------------------------------------------------------
-> Note: All entity class annotations are present in the 'jakarta.persistence' 
+  Note :  All entity class annotations are present in the 'jakarta.persistence' 
   package.
 
 * @Entity : It is a class-level annotation. The entity annotation in Hibernate 
@@ -106,7 +112,7 @@ Key Components of Hibernate:
 * @Column : By using this annotation, we set the column name of the database table.
 
 
-7. WHAT IS JPA (JAVA PERSISTENCE API)?
+7. WHAT IS JPA (JAVA PERSISTENCE API) ?
 -----------------------------------------------------------------------
 * ORM creates a bridge for communication for your application (Java / Python / 
   .NET) with a relational database, so it is called ORM.
